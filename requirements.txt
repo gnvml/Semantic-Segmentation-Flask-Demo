@@ -1,7 +1,7 @@
-numpy
+gunicorn
+flask
+torch==1.7.0
+torchvision==0.8.1
+Flask-Reuploaded
+Flask-WTF
 scipy
-pytorch==0.4.1
-torchvision
-opencv3
-yacs
-tqdm

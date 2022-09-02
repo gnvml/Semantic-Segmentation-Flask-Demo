@@ -7,7 +7,8 @@ class SegmentModel():
     def __init__(self) -> None:
         #Download weight
         self.download_weigth()
-        
+        #Check device
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         # Network Builders
         net_encoder = ModelBuilder.build_encoder(
             arch='resnet50dilated',
@@ -23,7 +24,7 @@ class SegmentModel():
         crit = torch.nn.NLLLoss(ignore_index=-1)
         self.segmentation_module = SegmentationModule(net_encoder, net_decoder, crit)
         self.segmentation_module.eval()
-        self.segmentation_module.cuda()
+        self.segmentation_module.to(self.device)
 
     def download_weigth(self):
         if not os.path.exists('ckpt/ade20k-resnet50dilated-ppm_deepsup'):
@@ -40,7 +41,7 @@ class SegmentModel():
         pil_image = PIL.Image.open(image_path).convert('RGB')
         img_original = numpy.array(pil_image)
         img_data = pil_to_tensor(pil_image)
-        singleton_batch = {'img_data': img_data[None].cuda()}
+        singleton_batch = {'img_data': img_data[None].to('cpu')}
         output_size = img_data.shape[1:]
 
         # Run the segmentation at the highest resolution.

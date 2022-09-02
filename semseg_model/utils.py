@@ -59,3 +59,9 @@ def colorEncode(labelmap, colors, mode='RGB'):
         return labelmap_rgb[:, :, ::-1]
     else:
         return labelmap_rgb
+
+def labelEncode(labelmap, names, colors):
+    label = {}
+    for idx in unique(labelmap):
+        label[names[idx+1]] = '#%02x%02x%02x' %(tuple(colors[idx]))
+    return label
