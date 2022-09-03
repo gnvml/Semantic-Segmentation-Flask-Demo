@@ -3,7 +3,7 @@
 1) Flask is a micro web framework written in Python.
 2) SemanticSegmentationModel Your own semantic segmentation model
 ## Get Online Demo from AWS
-Access: http://ec2-44-203-2-248.compute-1.amazonaws.com:4999/
+Access: http://ec2-34-226-138-182.compute-1.amazonaws.com:4999/
 ## Project stucture
 ```
 root
